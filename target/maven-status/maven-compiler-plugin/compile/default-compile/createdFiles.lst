@@ -1,6 +1,7 @@
 com/ud/ag/todo/TodoTaskManagerApplication.class
 com/ud/ag/todo/config/SwaggerConfig.class
 com/ud/ag/todo/service/TodoService.class
+com/ud/ag/todo/dao/TodoDAO.class
 com/ud/ag/todo/entity/TodoItem.class
 com/ud/ag/todo/service/TodoServiceImpl.class
 com/ud/ag/todo/controller/TodoController.class

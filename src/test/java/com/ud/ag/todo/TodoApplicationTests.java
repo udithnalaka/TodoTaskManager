@@ -1,6 +1,7 @@
 package com.ud.ag.todo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -28,7 +29,15 @@ public class TodoApplicationTests {
 	private TodoService todoService;
 
 	private static final String TODO_API_PATH = "/api/v1/todos";
-	private static final int TODO_ID_VALID = 1;
+	
+	private static final int TODO_ID_VALID = 4;
+	private static final int TODO_ID_INVALID = 99;
+	private static final String TODO_TEXT = "Find an IT job in Brisbane";
+	private static final boolean TODO_COMPLETED = false;
+	
+	private static final String RESPONSE_PARAM_TODOITEM_ID = "id";
+	private static final String RESPONSE_PARAM_TODOITEM_TEXT = "text";
+	private static final String RESPONSE_PARAM_TODOITEM_COMPLETED = "completed";
 
 	@Before
 	public void setup() {
@@ -42,7 +51,18 @@ public class TodoApplicationTests {
 	public void getTodoItemByIdWithValidIdShouldReturnTodoItem() throws Exception {
 
 		todoMockMvc.perform(get(TODO_API_PATH + "/" + TODO_ID_VALID))
-			.andExpect(status().isOk());
+			.andExpect(status().isOk())
+			.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_ID).value(TODO_ID_VALID))
+			.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_TEXT).value(TODO_TEXT))
+			.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_COMPLETED).value(TODO_COMPLETED));
+	}
+	
+	
+	@Test
+	public void getTodoItemByIdWithInValidIdShouldReturnNotFound() throws Exception {
+
+		todoMockMvc.perform(get(TODO_API_PATH + "/" + TODO_ID_INVALID))
+			.andExpect(status().isNotFound());
 	}
 
 }

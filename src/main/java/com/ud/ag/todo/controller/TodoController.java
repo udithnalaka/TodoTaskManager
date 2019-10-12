@@ -1,5 +1,7 @@
 package com.ud.ag.todo.controller;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,12 @@ public class TodoController {
 	}
 
 	
+	/**
+	 * get a TodoItem for the passed id.
+	 * 
+	 * @param id TodoItem id
+	 * @return {@link ResponseEntity<TodoItem>}
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Todo Item Successfully retriewed"),
@@ -43,9 +51,11 @@ public class TodoController {
 			@ApiResponse(code = 404, message = "Todo Item Not Found") })
 	public ResponseEntity<TodoItem> getTodoItemById(@PathVariable("id") final int id) {
 		LOGGER.info("getTodoItemById(). ID : {}", id);
-
-		return new ResponseEntity<>(todoService.getTodoItemById(id), HttpStatus.OK);
-
+		
+		return Optional.ofNullable(todoService.getTodoItemById(id))
+				.map(result -> ResponseEntity.ok(result))
+        		.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		
 	}
 
 }

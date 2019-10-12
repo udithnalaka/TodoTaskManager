@@ -14,6 +14,22 @@ public class TodoItem {
 		this.isCompleted = isCompleted;
 		this.createdAt = createdAt;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public boolean isCompleted() {
+		return isCompleted;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
 
 	@Override
 	public String toString() {

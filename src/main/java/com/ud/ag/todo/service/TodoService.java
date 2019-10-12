@@ -5,9 +5,10 @@ import com.ud.ag.todo.entity.TodoItem;
 public interface TodoService {
 
 	/**
-	 * View a Todo Item {@link TodoItem}.
+	 * View a TodoItem for the passed id {@link TodoItem}.
 	 *
-	 * @param resId result id
+	 * @param id TodoItem id
+	 * 
 	 * @return {@link TodoItem}
 	 */
 	public TodoItem getTodoItemById(final int id);
