@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ud.ag</groupId>
-	<artifactId>todo</artifactId>
+	<artifactId>TodoTaskManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>todo</name>
+	<name>TodoTaskManager</name>
 	<description>ToDO application</description>
 
 	<properties>
