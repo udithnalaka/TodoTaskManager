@@ -40,4 +40,12 @@ public class TodoDAO {
 		return todoItems.stream().filter(todo -> todo.getId() == id).findFirst();
 	}
 
+	public TodoItem saveTodoItem(TodoItem todoItem) {
+		
+		if(todoItems.add(todoItem)) {
+			return todoItem;
+		}
+		return null;
+	}
+
 }

@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ud.ag.todo.entity.TodoItem;
@@ -42,11 +45,12 @@ public class TodoController {
 	 * get a TodoItem for the passed id.
 	 * 
 	 * @param id TodoItem id
+	 * 
 	 * @return {@link ResponseEntity<TodoItem>}
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
-			@ApiResponse(code = 200, message = "Todo Item Successfully retriewed"),
+			@ApiResponse(code = 200, message = "Todo Item Successfully Retriewed"),
 			@ApiResponse(code = 400, message = "Validation Error"),
 			@ApiResponse(code = 404, message = "Todo Item Not Found") })
 	public ResponseEntity<TodoItem> getTodoItemById(@PathVariable("id") final int id) {
@@ -56,6 +60,26 @@ public class TodoController {
 				.map(result -> ResponseEntity.ok(result))
         		.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		
+	}
+	
+	
+	/**
+	 * create a TodoItem.
+	 * 
+	 * @param todoItem new {@link TodoItem}
+	 * 
+	 * @return {@link ResponseEntity<TodoItem>}
+	 */
+	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Todo Item Successfully Created"),
+			@ApiResponse(code = 400, message = "Validation Error") })
+	public ResponseEntity<TodoItem> createTodoItem(@Validated @RequestBody(required = true) TodoItem todoItem) {
+		LOGGER.info("createTodoItem(). TodoItem : {} ", todoItem);
+		
+		return Optional.ofNullable(todoService.createTodoItem(todoItem))
+				.map(result -> ResponseEntity.ok(result))
+        		.orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
 	}
 
 }

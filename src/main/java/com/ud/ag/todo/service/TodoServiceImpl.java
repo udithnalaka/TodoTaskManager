@@ -40,4 +40,14 @@ public class TodoServiceImpl implements TodoService {
 		return todo.get();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TodoItem createTodoItem(TodoItem todoItem) {
+		LOGGER.info("createTodoItem(). TodoItem : {}", todoItem);
+		
+		return todoDao.saveTodoItem(todoItem);
+	}
+
 }

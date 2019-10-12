@@ -13,4 +13,14 @@ public interface TodoService {
 	 */
 	public TodoItem getTodoItemById(final int id);
 
+	
+	/**
+	 * create a {@link TodoItem}.
+	 * 
+	 * @param todoItem TodoItem
+	 * 
+	 * @return newly created {@link TodoItem}.
+	 */
+	public TodoItem createTodoItem(final TodoItem todoItem);
+
 }

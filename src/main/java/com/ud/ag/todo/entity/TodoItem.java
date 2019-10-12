@@ -1,11 +1,20 @@
 package com.ud.ag.todo.entity;
 
+import javax.validation.constraints.Size;
+
 public class TodoItem {
 
 	private int id;
+
+	@Size(min = 1, max = 50)
 	private String text;
+
 	private boolean isCompleted;
+
 	private String createdAt;
+	
+	public TodoItem() {
+	}
 
 	public TodoItem(int id, String text, boolean isCompleted, String createdAt) {
 		super();
@@ -14,7 +23,7 @@ public class TodoItem {
 		this.isCompleted = isCompleted;
 		this.createdAt = createdAt;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
