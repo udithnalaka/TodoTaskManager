@@ -1,14 +1,16 @@
 package com.ud.ag.todo.service;
 
+import com.ud.ag.todo.entity.BalanceTestResult;
+
 public interface TaskService {
 
 	/**
 	 * check if the brackets in the input string is properly balanced.
 	 * 
-	 * @param text
+	 * @param input
 	 * 
-	 * @return boolean
+	 * @return {@link BalanceTestResult}
 	 */
-	public boolean checkBracketsBalanced(final String text);
+	public BalanceTestResult checkBracketsBalanced(final String input);
 
 }

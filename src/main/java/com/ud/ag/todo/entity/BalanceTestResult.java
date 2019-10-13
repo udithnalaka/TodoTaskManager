@@ -4,27 +4,25 @@ public class BalanceTestResult {
 	
 	private String input;
 	
-	private boolean isBalanced;
+	private boolean balanced;
+
+	public BalanceTestResult(String input, boolean balanced) {
+		super();
+		this.input = input;
+		this.balanced = balanced;
+	}
 
 	public String getInput() {
 		return input;
 	}
 
-	public void setInput(String input) {
-		this.input = input;
-	}
-
 	public boolean isBalanced() {
-		return isBalanced;
-	}
-
-	public void setBalanced(boolean isBalanced) {
-		this.isBalanced = isBalanced;
+		return balanced;
 	}
 
 	@Override
 	public String toString() {
-		return "BalanceTestResult [input=" + input + ", isBalanced=" + isBalanced + "]";
+		return "BalanceTestResult [input=" + input + ", isBalanced=" + balanced + "]";
 	}
 	
 }

@@ -34,6 +34,13 @@ public class TaskController {
 		this.taskService = taskService;
 	}
 	
+	/**
+	 * Checks if brackets in a string are balanced.
+	 * 
+	 * @param input String. 
+	 * 		lenth should be less then 100
+	 * @return {@link BalanceTestResult}
+	 */
 	@GetMapping(value = "/validateBrackets", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "OK"),
@@ -41,7 +48,12 @@ public class TaskController {
 	public ResponseEntity<BalanceTestResult> checkBracketsBalanced(@RequestParam("input") final String input) {
 		LOGGER.info("checkBracketsBalanced(). Input : {}", input);
 		
-		return null;
+		if(input.length() > 100) {
+			LOGGER.info("Input length > 100. Invalid request.");
+			return ResponseEntity.badRequest().body(null);
+		}
+		
+		return ResponseEntity.ok(taskService.checkBracketsBalanced(input));
 		
 	}
 }
