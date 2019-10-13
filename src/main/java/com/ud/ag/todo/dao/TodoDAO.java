@@ -1,8 +1,7 @@
 package com.ud.ag.todo.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -18,33 +17,55 @@ import com.ud.ag.todo.entity.TodoItem;
 @Component
 public class TodoDAO {
 
-	private static List<TodoItem> todoItems = new ArrayList<>();
+	//Map to hold the Todo items in memory.
+	private static Map<Integer, TodoItem> todoItems = new HashMap<>();
 
 	static {
-		todoItems.add(new TodoItem(1, "Do some exercises", false, ""));
-		todoItems.add(new TodoItem(2, "Study ReactJS ", true, ""));
-		todoItems.add(new TodoItem(3, "Go to the Dentist", false, ""));
-		todoItems.add(new TodoItem(4, "Find an IT job in Brisbane", false, ""));
+		todoItems.put(1, new TodoItem(1, "Do some exercises", false, ""));
+		todoItems.put(2, new TodoItem(2, "Study ReactJS ", true, ""));
+		todoItems.put(3, new TodoItem(3, "Go to the Dentist", false, ""));
+		todoItems.put(4, new TodoItem(4, "Find an IT job in Brisbane", false, ""));
 
 	}
 
 	/**
-	 * Check if the passed Todo id is available in the List<TodoItem>, and return the
-	 * corresponding TodoItem.
+	 * get an item from the TodoItem map.
 	 * 
 	 * @param id
-	 * 
-	 * @return Optional<TodoItem>
+	 * @return TodoItem
 	 */
-	public Optional<TodoItem> getTodoItemById(final int id) {
-		return todoItems.stream().filter(todo -> todo.getId() == id).findFirst();
+	public TodoItem getTodoItemById(final int id) {
+		
+		return todoItems.get(id);
 	}
 
+	/**
+	 * add a item to the TodoItem map.
+	 * 
+	 * @param todoItem
+	 * @return created TodoItem
+	 */
 	public TodoItem saveTodoItem(TodoItem todoItem) {
-		
-		if(todoItems.add(todoItem)) {
-			return todoItem;
+
+		todoItems.put(todoItem.getId(), todoItem);
+
+		return todoItem;
+	}
+
+	/**
+	 * update an item in the TodoItem map.
+	 * 
+	 * @param id
+	 * @param todoItem
+	 * @return updated TodoItem
+	 */
+	public TodoItem updateTodoItem(int id, TodoItem todoItem) {
+
+		if (todoItems.containsKey(id)) {
+			todoItems.put(id, todoItem);
+			return todoItems.get(id);
 		}
+
 		return null;
 	}
 

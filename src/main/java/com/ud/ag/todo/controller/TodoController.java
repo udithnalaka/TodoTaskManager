@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,9 +67,9 @@ public class TodoController {
 	/**
 	 * create a TodoItem.
 	 * 
-	 * @param todoItem new {@link TodoItem}
+	 * @param todoItem {@link TodoItem}
 	 * 
-	 * @return {@link ResponseEntity<TodoItem>}
+	 * @return newly created {@link TodoItem}
 	 */
 	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
@@ -80,6 +81,29 @@ public class TodoController {
 		return Optional.ofNullable(todoService.createTodoItem(todoItem))
 				.map(result -> ResponseEntity.ok(result))
         		.orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+	}
+	
+	
+	/**
+	 * update a TodoItem for the passed id.
+	 * 
+	 * @param id TodoItem id
+	 * @param todoItem {@link TodoItem}
+	 * 
+	 * @return updated {@link TodoItem}
+	 */
+	@PatchMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Todo Item Successfully Updated"),
+			@ApiResponse(code = 400, message = "Validation Error"),
+			@ApiResponse(code = 404, message = "Todo Item Not Found") })
+	public ResponseEntity<TodoItem> updateTodoItem(@PathVariable("id") final int id,
+			@Validated @RequestBody(required = true) TodoItem todoItem) {
+		LOGGER.info("updateTodoItem(). ID : {}, TodoItem : {} ", id, todoItem);
+
+		return Optional.ofNullable(todoService.updateTodoItem(id, todoItem))
+				.map(result -> ResponseEntity.ok(result))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
 }

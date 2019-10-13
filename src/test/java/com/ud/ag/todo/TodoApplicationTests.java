@@ -1,6 +1,7 @@
 package com.ud.ag.todo;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,6 +45,12 @@ public class TodoApplicationTests {
 	private static final String TODO_TEXT_ID_10_INVALID = "Run test case for create todo item with too large text";
 	private static final boolean TODO_COMPLETED_ID_10 = false;
 	private static final String TODO_CREATEDAT_ID_10 = "12/10/2019";
+	
+	private static final int TODO_UPDATE_ID_VALID_3 = 3;
+	private static final String TODO_UPDATE_TEXT_ID_3 = "Go to the Dentist at greenslopes";
+	private static final String TODO_TEXT_ID_3_INVALID = "Run test case for create todo item with too large text";
+	private static final String TODO_UPDATE_CREATEDAT_ID_3 = "12/31/2020";
+	private static final boolean TODO_UPDATE_COMPLETED_ID_3 = false;
 	
 	private static final String RESPONSE_PARAM_TODOITEM_ID = "id";
 	private static final String RESPONSE_PARAM_TODOITEM_TEXT = "text";
@@ -120,5 +127,46 @@ public class TodoApplicationTests {
 		
 	}
 	////END - test cases for createTodoItem()
+	
+	
+	////START - test cases for updateTodoItem()
+	@Test
+	public void updateTodoItemWithValidEntityShouldReturnTheUpdatedTodoItem() throws Exception {
+
+		todoMockMvc
+				.perform(patch(TODO_API_PATH + "/" + TODO_UPDATE_ID_VALID_3)
+						.contentType(MediaType.APPLICATION_JSON_UTF8)
+						.content(TestUtil.convertObjectToJsonBytes(createTodoItemForTesting(TODO_UPDATE_ID_VALID_3,
+								TODO_UPDATE_TEXT_ID_3, TODO_UPDATE_COMPLETED_ID_3, TODO_UPDATE_CREATEDAT_ID_3))))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_ID).value(TODO_UPDATE_ID_VALID_3))
+				.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_TEXT).value(TODO_UPDATE_TEXT_ID_3))
+				.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_COMPLETED).value(TODO_UPDATE_COMPLETED_ID_3))
+				.andExpect(jsonPath(RESPONSE_PARAM_TODOITEM_CREATEDAT).value(TODO_UPDATE_CREATEDAT_ID_3));
+	}
+	
+	@Test
+	public void updateTodoItemWithInvalidIdShouldReturnNotFound() throws Exception {
+
+		todoMockMvc
+				.perform(patch(TODO_API_PATH + "/" + TODO_ID_INVALID)
+						.contentType(MediaType.APPLICATION_JSON_UTF8)
+						.content(TestUtil.convertObjectToJsonBytes(createTodoItemForTesting(TODO_ID_INVALID,
+								TODO_UPDATE_TEXT_ID_3, TODO_UPDATE_COMPLETED_ID_3, TODO_UPDATE_CREATEDAT_ID_3))))
+				.andExpect(status().isNotFound());
+	}
+	
+	
+	@Test
+	public void updateTodoItemWithTooLargeTextShouldReturnValidationError() throws Exception {
+
+		todoMockMvc
+				.perform(patch(TODO_API_PATH + "/" + TODO_ID_INVALID)
+						.contentType(MediaType.APPLICATION_JSON_UTF8)
+						.content(TestUtil.convertObjectToJsonBytes(createTodoItemForTesting(TODO_ID_INVALID,
+								TODO_TEXT_ID_3_INVALID, TODO_UPDATE_COMPLETED_ID_3, TODO_UPDATE_CREATEDAT_ID_3))))
+				.andExpect(status().isBadRequest());
+	}
+	////END - test cases for updateTodoItem()
 
 }
