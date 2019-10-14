@@ -1,12 +1,12 @@
 # Getting Started
 
-##run test
+###run test
 mvn clean test
 
-##build/run test/package app
+###build/run test/package app
 mvn clean install
 
-##run app
+###run app
 java -jar ./target/TodoTaskManager-0.0.1-SNAPSHOT.jar
 
 
