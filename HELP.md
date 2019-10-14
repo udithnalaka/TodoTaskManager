@@ -15,12 +15,12 @@ java -jar ./target/TodoTaskManager-0.0.1-SNAPSHOT.jar
 
 2) Todo API
     
-POST   /api/v1/todos       createTodoItem
-GET    /api/v1/todos/{id}  getTodoItemById
-PATCH  /api/v1/todos/{id}  updateTodoItem
+* POST   /api/v1/todos       createTodoItem
+* GET    /api/v1/todos/{id}  getTodoItemById
+* PATCH  /api/v1/todos/{id}  updateTodoItem
 
 3) Task API
 
-GET  /api/v1/tasks/validateBrackets  checkBracketsBalanced
+* GET  /api/v1/tasks/validateBrackets  checkBracketsBalanced
 
 
