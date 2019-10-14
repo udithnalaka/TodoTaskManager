@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.ud.ag.todo.TodoApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.359 s - in com.ud.ag.todo.TodoApplicationTests
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.325 s - in com.ud.ag.todo.TodoApplicationTests

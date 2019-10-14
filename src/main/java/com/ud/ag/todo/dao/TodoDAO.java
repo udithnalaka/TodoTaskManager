@@ -21,10 +21,10 @@ public class TodoDAO {
 	private static Map<Integer, TodoItem> todoItems = new HashMap<>();
 
 	static {
-		todoItems.put(1, new TodoItem(1, "Do some exercises", false, ""));
-		todoItems.put(2, new TodoItem(2, "Study ReactJS ", true, ""));
-		todoItems.put(3, new TodoItem(3, "Go to the Dentist", false, ""));
-		todoItems.put(4, new TodoItem(4, "Find an IT job in Brisbane", false, ""));
+		todoItems.put(1, new TodoItem(1, "Do some exercises", false, "2019-10-13T01:50:58.735Z"));
+		todoItems.put(2, new TodoItem(2, "Study ReactJS ", true, "2019-10-01T01:50:58.735Z"));
+		todoItems.put(3, new TodoItem(3, "Go to the Dentist", false, "2019-12-13T01:50:58.735Z"));
+		todoItems.put(4, new TodoItem(4, "Find an IT job in Brisbane", false, "2019-09-20T01:50:58.735Z"));
 
 	}
 
