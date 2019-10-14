@@ -7,7 +7,7 @@ mvn clean test
 mvn clean install
 
 ### run app
-java -jar ./target/TodoTaskManager-0.0.1-SNAPSHOT.jar
+java -jar TodoTaskManager-0.0.1-SNAPSHOT.jar
 
 
 ### available API endpoints
