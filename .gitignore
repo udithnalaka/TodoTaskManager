@@ -66,5 +66,6 @@ target/*
 /target/**
 /target/classes/
 
+.attach*
 
 # End of https://www.gitignore.io/api/eclipse,java-web
