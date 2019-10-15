@@ -24,3 +24,11 @@ java -jar TodoTaskManager-0.0.1-SNAPSHOT.jar
 * GET  /api/v1/tasks/validateBrackets  checkBracketsBalanced
 
 
+### dockerizing the app (newly added on 16/10/2019)
+docker image is created and added to docker hub
+
+* to pull - docker pull udithnalaka/todo-task-manager
+* to run  - docker run -p 9090:8080 udithnalaka/todo-task-manager
+* swagger doc can be access from - http://localhost:9090/swagger-ui.html
+
+
