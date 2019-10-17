@@ -1,6 +1,8 @@
 package com.ud.ag.todo.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -38,6 +40,8 @@ public class TodoServiceTest {
 		
 		TodoItem todoItem = todoService.getTodoItemById(1);
 		
+		verify(todoDaoMock, times(1)).getTodoItemById(Mockito.anyInt());
+		
 		assertEquals(todoItem, todoItem);
 		assertEquals(todoItem.getText(), todoItem.getText());
 	}
@@ -48,6 +52,8 @@ public class TodoServiceTest {
 			.thenReturn(null);
 		
 		assertEquals(null, todoService.getTodoItemById(10));
+		
+		verify(todoDaoMock, times(1)).getTodoItemById(Mockito.anyInt());
 	}
 
 }
