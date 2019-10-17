@@ -1,4 +1,4 @@
-package com.ud.ag.todo;
+package com.ud.ag.todo.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -17,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.ud.ag.todo.TodoTaskManagerApplication;
 import com.ud.ag.todo.controller.TaskController;
 import com.ud.ag.todo.service.TaskService;
 
